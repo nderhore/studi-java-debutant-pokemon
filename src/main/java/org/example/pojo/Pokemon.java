@@ -2,18 +2,20 @@ package org.example.pojo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Pokemon {
 
-    //Attribut
     private String prenom;
-    private List<String> capacites;
+    private List<Capacite> capacites;
     private Integer niveau;
     private Boolean isShiny;
     private String nature;
 
-    //Constructeur
-    public Pokemon(String prenom, List<String> capacites, Integer niveau, Boolean isShiny, String nature) {
+
+
+    public Pokemon(String prenom, List<Capacite> capacites, Integer niveau, Boolean isShiny, String nature) {
         this.prenom = prenom;
         this.capacites = capacites;
         this.niveau = niveau;
@@ -21,10 +23,45 @@ public class Pokemon {
         this.nature = nature;
     }
 
+
     public Pokemon(){
         this.capacites = new ArrayList<>();
     }
 
+
+    public void addCapacities(Capacite capacite){
+        if (this.capacites != null && this.capacites.size() < 4){
+            this.capacites.add(capacite);
+        } else if(this.capacites != null) {
+            this.menuForbiddenCapacitie(capacite);
+
+        }
+    }
+
+    private void menuForbiddenCapacitie(Capacite capacite) {
+        System.out.println("Vous connaissez déjà 4 capacité.");
+        System.out.println("Que voulez-vous faire ?");
+        System.out.println("1 : oublier une capacite");
+        System.out.println("2 : ne rien faire");
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Entrez votre choix : ");
+        int saisie = sc.nextInt();
+
+        switch (saisie){
+            case 1:
+                Random random = new Random();
+                int randomInt = random.nextInt(capacites.size()-1);
+                this.capacites.remove(randomInt);
+                System.out.println("la capacite " + (randomInt+1) + " a été oublié !");
+                break;
+            case 2:
+                System.out.println("aucune capacité a été oubliée !");
+                break;
+            default :
+                System.out.println("choix incorrecte");
+        }
+        sc.close();
+    }
 
     //accesseur et mutateur
     public String getNature(){
@@ -43,11 +80,11 @@ public class Pokemon {
         this.prenom = prenom;
     }
 
-    public List<String> getCapacites() {
+    public List<Capacite> getCapacites() {
         return capacites;
     }
 
-    public void setCapacites(List<String> capacites) {
+    public void setCapacites(List<Capacite> capacites) {
         this.capacites = capacites;
     }
 

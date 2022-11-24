@@ -1,27 +1,29 @@
 package org.example;
 
+import org.example.pojo.Capacite;
 import org.example.pojo.Pokemon;
 import org.example.pojo.Salameche;
+import org.example.stateType.Type;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * Hello world!
  *
  */
-public class App 
+
+public class App
 {
     public static void main( String[] args )
     {
-        String maString = "toto"; //String maString = new String("toto");
-        List<String> mesCapacites = new ArrayList<>(Arrays.asList(
-                "griffe",
-                "rugissement"
-        ));
-        Salameche monPokemon = new Salameche("feu");
-        System.out.println(monPokemon);
+        Map<String,Capacite> ctCapacite = new LinkedHashMap<>();
+        ctCapacite.put("1",new Capacite("balle ombre",100,100, Type.SPECTRE));
+
+        for(String i : ctCapacite.keySet()){
+            System.out.println (" la ct " + i + "contient : " +ctCapacite.get(i));
+        }
+
 
     }
+
 }
