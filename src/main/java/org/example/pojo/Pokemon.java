@@ -1,9 +1,6 @@
 package org.example.pojo;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Pokemon {
 
@@ -25,6 +22,10 @@ public class Pokemon {
 
 
     public Pokemon(){
+        this.prenom = "unPrenom";
+        this.nature = "gentil";
+        this.isShiny = true;
+        this.niveau = 15;
         this.capacites = new ArrayList<>();
     }
 
@@ -43,10 +44,15 @@ public class Pokemon {
         System.out.println("Que voulez-vous faire ?");
         System.out.println("1 : oublier une capacite");
         System.out.println("2 : ne rien faire");
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Entrez votre choix : ");
-        int saisie = sc.nextInt();
 
+        System.out.print("Entrez votre choix : ");
+        int saisie = 0;
+        try(Scanner sc = new Scanner(System.in)){
+            saisie = sc.nextInt();
+        }catch (InputMismatchException e){
+            System.out.println("ce que vous avez écris n'est pas correcte !");
+        }
+        
         switch (saisie){
             case 1:
                 Random random = new Random();
@@ -60,7 +66,6 @@ public class Pokemon {
             default :
                 System.out.println("choix incorrecte");
         }
-        sc.close();
     }
 
     //accesseur et mutateur
@@ -106,6 +111,6 @@ public class Pokemon {
 
     @Override
     public String toString(){
-        return "Bonjour, je m'appelle " + this.prenom + " et je possède " + this.capacites.size() + " capacites";
+        return "Bonjour, je m'appelle " + this.prenom + " et je possède " + this.capacites.size() + " capacites\n";
     }
 }

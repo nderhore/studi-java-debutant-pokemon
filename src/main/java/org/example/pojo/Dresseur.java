@@ -29,6 +29,11 @@ public class Dresseur {
                 .collect(Collectors.toList());
     }
 
+    public void capturerPokemon(Pokemon pokemon){
+        this.pokemonList.add(pokemon);
+    }
+
+
     public void renameAllPokemon(String name){
         this.pokemonList.forEach(pokemon -> {
                     pokemon.setPrenom(pokemon.getPrenom() + name);
