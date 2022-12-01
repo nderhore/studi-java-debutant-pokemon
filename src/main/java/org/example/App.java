@@ -1,11 +1,13 @@
 package org.example;
 
+import org.example.dao.impl.PokemonDaoImpl;
 import org.example.pojo.Capacite;
 import org.example.pojo.Dresseur;
 import org.example.pojo.Pokemon;
 import org.example.pojo.Salameche;
 import org.example.stateType.Type;
 
+import java.sql.SQLException;
 import java.util.*;
 
 /**
@@ -15,10 +17,14 @@ import java.util.*;
 
 public class App
 {
-    public static void main( String[] args )
+    public static void main( String[] args ) throws SQLException
     {
+        PokemonDaoImpl pokemonDao = new PokemonDaoImpl();
+
         //Creation de la partie !
         Dresseur monDresseur = new Dresseur("Studi",10,new ArrayList<>());
+
+
         int saisie = 0;
         while(saisie != 4) {
             saisie = 0;
@@ -38,12 +44,12 @@ public class App
 
             switch (saisie){
                 case 1:
-                    monDresseur.capturerPokemon(new Pokemon());
+                    pokemonDao.addPokemon(new Pokemon());
                     break;
                 case 2:
                     continue;
                 case 3:
-                    System.out.println(monDresseur.getPokemonList());
+                    System.out.println(pokemonDao.getAllPokemon());
                     break;
                 case 4:
                     System.out.println("merci d'avoir choisi Poké-services !");
